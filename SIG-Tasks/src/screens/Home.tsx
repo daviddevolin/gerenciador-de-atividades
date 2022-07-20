@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Logo from '../assets/logo_secondary.svg';
 
 import { Filter } from '../components/Filter';
+import { Button } from '../components/Button';
 
 import { Order, OrderProps } from '../components/Order';
 
@@ -75,10 +76,8 @@ export function Home() {
                     keyExtractor={item => item.id}
                     renderItem = {({item}) => <Order data={item}/>}
                 />
-
+                <Button title="nova solicitação" />
             </VStack>
-
-            
         </VStack>
     );
 }
