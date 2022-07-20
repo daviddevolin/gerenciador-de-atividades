@@ -22,6 +22,10 @@ export function Home() {
 
     const { colors } = useTheme() ;
 
+    function handleNewOrder(){
+        
+    }
+
     return (
         <VStack flex={1} pb={6} bg= "gray.700">
             <HStack
