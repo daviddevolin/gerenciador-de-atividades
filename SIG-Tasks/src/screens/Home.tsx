@@ -1,4 +1,5 @@
 import { HStack,IconButton, VStack , useTheme, Text, Heading, FlatList, Center} from 'native-base';
+import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 
 
@@ -17,13 +18,24 @@ import {ChatTeardropText} from 'phosphor-react-native'
 export function Home() {
     const [statusSlected, setStatusSelected] = useState <'open' | 'closed'> ('open');
     const [orders, setOrders] = useState <OrderProps []> ([
+        {
+            id:'456',
+            patrimony:'123456',
+            when: '10/12/2012 as 10',
+            status: 'open'
+        }
         
     ]);
-
+    const navigation = useNavigation();
     const { colors } = useTheme() ;
 
+    
     function handleNewOrder(){
-        
+        navigation.navigate('new');
+    }
+
+    function handleOpenDetails( orderId: string){
+        navigation.navigate('details', { orderId});
     }
 
     return (
@@ -76,7 +88,7 @@ export function Home() {
                 <FlatList
                     data={orders}
                     keyExtractor={item => item.id}
-                    renderItem = {({item}) => <Order data={item}/>}
+                    renderItem = {({item}) => <Order data={item} onPress={()=> handleOpenDetails(item.id)} />}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle = {{
                         paddingBottom: 100
@@ -91,7 +103,7 @@ export function Home() {
                         </Center>
                     )}
                 />
-                <Button title="nova solicitação" />
+                <Button title="nova solicitação" onPress={handleNewOrder} />
             </VStack>
         </VStack>
     );
